@@ -16,7 +16,9 @@ export const PAROIS = [
 
 export const DEBITS_VENTILATION: Record<string, number> = {
   "Bureau": 18, "Classe": 15, "Commerce": 22, "Restauration": 22, "Sportif": 25,
-  "Salle de bains": 15, "WC": 15, "Cuisine collective": 20,
+  "Salle de bains": 15, "WC": 15, "Cuisine collective": 20, "Salle de réunion": 18,
+  "Cuisine <150 repas": 25, "Cuisine 150-500": 20, "Cuisine 501-1500": 15,
+  "Bibliothèque": 18, "Dépôt": 0.1, "Espace sportif": 22,
 };
 
 export const sectionCirc = (dMm: number) => Math.PI * (dMm / 1000) ** 2 / 4;
