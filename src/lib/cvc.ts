@@ -39,6 +39,16 @@ export const getDN = (qM3h: number) => {
   const v = qM3h / 3600 / (Math.PI * (t.dn / 1000) ** 2 / 4);
   return { dn: t.dn, vitesse: v };
 };
+export const RATIOS_PRIX = {
+  chauffage: { eur_m2: 80, eur_kW: 120 },
+  eau_glacee: { eur_m2: 100, eur_kW: 150 },
+  ventilation: { eur_m3h: 5 },
+};
+export const calcPrix = (surface: number, puissance: number, typeSysteme: keyof typeof RATIOS_PRIX) => {
+  const r = RATIOS_PRIX[typeSysteme];
+  if (typeSysteme === "ventilation") return surface * 0 + puissance * (r as any).eur_m3h;
+  return surface * (r as any).eur_m2 + puissance * (r as any).eur_kW;
+};
 export const simu = (nb: number, majoration = 1.5) => (0.8 / Math.sqrt(nb - 1)) * majoration;
 export const dimPuissance = (surface: number, typeLocal: string) => {
   const w = typeLocal.includes("Restauration") || typeLocal.includes("Cuisine") ? 150 : typeLocal.includes("Classe") ? 80 : 100;
