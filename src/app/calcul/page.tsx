@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import ResultatCard from "@/components/ResultatCard";
-import { PAROIS } from "@/lib/cvc";
+import { PAROIS, dimPuissance, dimDebitVent } from "@/lib/cvc";
 
 const ORIENT = ["N","S","E","O","NE","NW","SE","SW"];
 const SOLAIRE: Record<string,{hiver:number;ete:number}> = { N:{hiver:50,ete:80}, S:{hiver:200,ete:120}, E:{hiver:120,ete:250}, O:{hiver:120,ete:250}, NE:{hiver:80,ete:180}, NW:{hiver:80,ete:180}, SE:{hiver:160,ete:200}, SW:{hiver:160,ete:200} };
@@ -36,6 +36,7 @@ export default function CalculPage() {
             <label className="flex flex-col text-sm">Vitré (m²)<input type="number" value={l.vitree} onChange={e=>upd(l.id,"vitree",+e.target.value)} className="border rounded p-1"/></label>
             <label className="flex flex-col text-sm">Vitrage<select value={l.vitrage} onChange={e=>upd(l.id,"vitrage",e.target.value)} className="border rounded p-1">{VITRAGES.map(v=><option key={v.type}>{v.type}</option>)}</select></label>
             <button onClick={()=>del(l.id)} className="bg-red-500 text-white rounded p-1 col-span-8">Suppr</button>
+            <div className="col-span-8 text-sm text-gray-600">Puissance estimée: {dimPuissance(l.surface, l.paroi).toFixed(0)} W | Débit ventilation: {dimDebitVent(l.surface*l.hauteur, l.paroi).toFixed(0)} m³/h</div>
           </div>
         ))}
       </div>

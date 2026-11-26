@@ -31,3 +31,11 @@ export const chezy = (dMm: number, pentePct: number) => {
 };
 
 export const simu = (nb: number, majoration = 1.5) => (0.8 / Math.sqrt(nb - 1)) * majoration;
+export const dimPuissance = (surface: number, typeLocal: string) => {
+  const w = typeLocal.includes("Restauration") || typeLocal.includes("Cuisine") ? 150 : typeLocal.includes("Classe") ? 80 : 100;
+  return surface * w;
+};
+export const dimDebitVent = (volume: number, typeLocal: string) => {
+  const volh = typeLocal.includes("Classe") ? 6 : 8;
+  return volume * volh;
+};
