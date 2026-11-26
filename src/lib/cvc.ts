@@ -49,6 +49,14 @@ export const calcPrix = (surface: number, puissance: number, typeSysteme: keyof 
   if (typeSysteme === "ventilation") return surface * 0 + puissance * (r as any).eur_m3h;
   return surface * (r as any).eur_m2 + puissance * (r as any).eur_kW;
 };
+export const SOLAIRE_MOIS: Record<string, number[]> = {
+  N: [50,60,70,80,90,100,100,90,80,70,60,50],
+  S: [200,220,240,200,180,150,150,180,200,220,240,200],
+  E: [120,140,160,130,110,90,90,110,130,150,160,140],
+  O: [120,140,160,130,110,90,90,110,130,150,160,140],
+};
+export const perteChargeGaine = (q: number, d: number, L: number) => (q/3600)**2 * L / (2 * 9.81 * (Math.PI*(d/1000)**2/4)**2) * 0.02;
+export const ecsDebit = (nbAppareils: number, coefSimu: number) => nbAppareils * coefSimu;
 export const simu = (nb: number, majoration = 1.5) => (0.8 / Math.sqrt(nb - 1)) * majoration;
 export const dimPuissance = (surface: number, typeLocal: string) => {
   const w = typeLocal.includes("Restauration") || typeLocal.includes("Cuisine") ? 150 : typeLocal.includes("Classe") ? 80 : 100;
