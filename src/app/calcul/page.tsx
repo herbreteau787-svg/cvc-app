@@ -18,6 +18,7 @@ export default function CalculPage() {
   const del = (id:number) => setLocaux(ls=>ls.filter(l=>l.id!==id));
   const depLocal = (l:Local) => l.surface*uOf(l.paroi)*l.deltaT + l.vitree*uVit(l.vitrage)*l.deltaT - SOLAIRE[l.orient].hiver*l.vitree;
   const totalVol = locaux.reduce((s,l)=>s+l.surface*l.hauteur,0);
+  if (typeof window !== "undefined") localStorage.setItem("cvc_locaux", JSON.stringify(locaux));
   const totalDep = locaux.reduce((s,l)=>s+depLocal(l),0);
   const totalSol = locaux.reduce((s,l)=>s+SOLAIRE[l.orient].hiver*l.vitree,0);
   return (

@@ -9,6 +9,7 @@ export default function PlomberiePage() {
   const upd = (id:number,k:keyof Troncon,v:string|number) => setTroncons(ts=>ts.map(t=>t.id===id?{...t,[k]:v}:t));
   const add = () => setTroncons(ts=>[...ts,{id:Date.now(),nom:`Tronçon ${ts.length+1}`,q:0.5,d:32,pente:1}]);
   const del = (id:number) => setTroncons(ts=>ts.filter(t=>t.id!==id));
+  if (typeof window !== "undefined") localStorage.setItem("cvc_troncons", JSON.stringify(troncons));
   return (
     <main className="p-6 space-y-4">
       <h1 className="text-2xl font-bold">Plomberie / Hydraulique</h1>
