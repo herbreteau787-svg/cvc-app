@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { chezy, sectionCirc } from "@/lib/cvc";
+import { chezy, sectionCirc, getDN } from "@/lib/cvc";
 
 type Troncon = { id:number; nom:string; q:number; d:number; pente:number };
 
@@ -21,6 +21,7 @@ export default function PlomberiePage() {
             <label className="flex flex-col text-sm">DN (mm)<input type="number" value={t.d} onChange={e=>upd(t.id,"d",+e.target.value)} className="border rounded p-1"/></label>
             <label className="flex flex-col text-sm">Pente (%)<input type="number" step="0.1" value={t.pente} onChange={e=>upd(t.id,"pente",+e.target.value)} className="border rounded p-1"/></label>
             <button onClick={()=>del(t.id)} className="bg-red-500 text-white rounded p-1">Suppr</button>
+            <div className="col-span-5 text-sm text-gray-600">DN suggéré: {getDN(t.q*3600).dn} mm (v={getDN(t.q*3600).vitesse.toFixed(2)} m/s)</div>
           </div>
         ))}
       </div>

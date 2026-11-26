@@ -30,6 +30,15 @@ export const chezy = (dMm: number, pentePct: number) => {
   return 70 * r ** (2 / 3) * Math.sqrt(i) * s;
 };
 
+export const DN_TABLE = [
+  { dn: 15, qMax: 0.5 }, { dn: 20, qMax: 1.0 }, { dn: 25, qMax: 1.8 },
+  { dn: 32, qMax: 3.0 }, { dn: 40, qMax: 4.5 }, { dn: 50, qMax: 7.0 },
+];
+export const getDN = (qM3h: number) => {
+  const t = DN_TABLE.find(x => qM3h <= x.qMax) || DN_TABLE[DN_TABLE.length - 1];
+  const v = qM3h / 3600 / (Math.PI * (t.dn / 1000) ** 2 / 4);
+  return { dn: t.dn, vitesse: v };
+};
 export const simu = (nb: number, majoration = 1.5) => (0.8 / Math.sqrt(nb - 1)) * majoration;
 export const dimPuissance = (surface: number, typeLocal: string) => {
   const w = typeLocal.includes("Restauration") || typeLocal.includes("Cuisine") ? 150 : typeLocal.includes("Classe") ? 80 : 100;
